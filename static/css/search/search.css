@@ -1,0 +1,99 @@
+
+
+.heloooo {
+    color:red;
+}
+
+
+#add_song_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    flex-direction: column;
+    
+}
+
+
+#add_song_cont input[type=text] {
+    padding: 6px;
+    border: none;
+    font-size: 17px;
+}
+
+
+#songs {
+    flex-direction: column; 
+    color: white;
+}
+
+#song {
+    display: flex;
+    margin-bottom: 10px; 
+    padding: 5px; 
+    width: 80%;
+}
+
+.image-column {
+    width: 100px; 
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+}
+
+.text-column {
+    flex: 1;
+    margin: auto 30px ;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+#player {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+
+#add-icon {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#searchButton {
+    width: 40px;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background: #0b7dda;
+}
+  
+
+/* #searchForm::after {
+    content: "";
+    clear: both;
+} */
+
+
+#audio {
+    width: 100px;
+}

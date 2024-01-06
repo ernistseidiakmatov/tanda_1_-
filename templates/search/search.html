@@ -1,0 +1,64 @@
+
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %}Search{% endblock %}
+
+<link rel="stylesheet" href="{% static 'css/search/search.css' %}">
+
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/search/search.css' %}"> -->
+
+{% block content %}
+    <div class="container-sm">
+        
+        <form class="d-flex" id="searchForm" action="{% url 'searchTrack' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" name="search-input" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <div>
+            {{ r }}
+            {{ p }}
+        </div>
+
+        <div id="songs">
+            {% for result in songs %}
+                <div class='container' id="song">
+                <div class="image-column">
+                    <img src="{{ result.coverArt }}"/>
+                </div>
+                <div class="text-column" style="color: black;">
+                    <!-- <h3> "{{ result.name }}" </h3>
+                    <h6> {{ result.artists.0.name }} </h6> -->
+                    <h3> {{ result.name }} </h3>
+                    <h5> {{ result.artists.0.name }} </h5>
+                </div>
+                <div id="player">
+                    <audio controls id="audio">
+                        <source src="{{ result.preview_url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                </div>
+            
+
+                <form method="post" action="" style="margin: auto;">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ result.id }}">
+                    <input type="hidden" name="name" value="{{ result.name }}">
+                    <input type="hidden" name="coverArt" value="{{ result.coverArt }}">
+                    <input type="hidden" name="artist" value="{{ result.artists }}">
+                    <input type="hidden" name="duration" value="{{ result.durationMillis }}">
+                    <input type="hidden" name="playability" value="{{ result.playability }}">
+                    <input type="hidden" name="preview_url" value="{{ result.preview_url }}">
+                    <button>ADD</button>
+                </form>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        
+    </div>
+{% endblock %}
