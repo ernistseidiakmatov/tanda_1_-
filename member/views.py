@@ -21,6 +21,6 @@ def login_user(request):
         return render(request, 'sign-in/index.html', {})	
 
 
-# @login_required(login_url='login')
+@login_required()
 def home(request):
     return render(request, 'home/home.html', {})

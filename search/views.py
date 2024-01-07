@@ -3,12 +3,16 @@ import requests
 from .forms import SearchForm
 
 from .models import UserTrack, Track
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def search(request):
     return render(request, 'search/search.html', {"r":"hello world"})
 
+
+@login_required
 def searchTrack(request):
     form = request.GET.get('search-input', '')
     # if request == 'POST':

@@ -1,0 +1,72 @@
+{% extends '../base/base.html' %}
+{% load static %}
+
+{% block title %}Vote{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+<link href="{% static 'js/assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/player/player.css' %}" rel="stylesheet">
+
+<div class="container-sm position-relative" style=" padding-top: 20px;">
+    {% for res in songs %}
+    {% if res.is_playing == 1 %}
+    <div class="player text-center">
+        <img style="margin-bottom: 10px;" class="playerCoverArt" src="{{ res.coverArt }}" alt="">
+        <div>
+            <audio controls id="myTrack" style="width: 250px;">
+                <source src="{{ res.preview_url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div class="player-song" style="text-align: center;">
+            <h4>{{ res.track_name }}</h4>
+            <h6>{{ res.artists.0.name }}</h6>
+        </div> <hr>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    {{vote}}
+    <h4>{{ play_next }}</h4>
+    <div class="poll" style="margin-bottom: 50px;">
+
+        <!-- <form action="" method="post">
+            {% csrf_token %} -->
+
+            {% for result in songs %}
+                {% if result.is_playing == 0 %}
+                <div class="form-check" style="padding-left: 0;">
+                    <label class="form-check-label d-flex align-items-center" style="width: 100%;">
+                        <img src="{{ result.coverArt }}" alt="coverArt" style="width: 50px; margin-left: 5px;">
+                            <h7 style="margin-left: 20px;">{{ result.track_name }} - {{ result.artists.0.name }}</h7>
+                            <!-- <input class="form-check-input" value="{{ result.track_id }}" style="margin-left: 0; margin-top: 18px;" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> -->
+                    </label>
+                </div> <hr>
+                {% endif %}
+            {% endfor %}
+            
+            <!-- <button type="submit" class="btn btn-primary" style="margin-top: 25px;">SUBMIT</button>
+        </form> -->
+          
+        
+    </div>
+</div>
+
+<script>
+    // Get the audio element
+    const audio = document.getElementById("myTrack");
+
+    // Play the audio on page load
+    audio.addEventListener("canplaythrough", function() {
+      audio.play();
+    });
+
+    // When the audio finishes playing, redirect to a new page
+    audio.addEventListener("ended", function() {
+      window.location.href = "{% url 'next_track' %}";
+    });
+  </script>
+
+{% endblock %}

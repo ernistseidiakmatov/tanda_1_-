@@ -1,0 +1,25 @@
+
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .player img {
+    width: 300px !important ;
+    padding-bottom: 10px;
+} */
+
+
+.playerCoverArt {
+    width: 300px;
+}
+
+
+.poll {
+    padding-top: 25px;
+}
+
+

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'bootstrap',
     'fontawesome',
     'search',
+    'player',
+    'voter',
 ]
 
 MIDDLEWARE = [

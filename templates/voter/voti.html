@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <link href="{% static 'js/assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/player/poll.css' %}" rel="stylesheet">
+</head>
+<body>
+
+    
+<div class="container position-relative" style=" padding-top: 20px;">
+    {% for res in songs %}
+    {% if res.is_playing == 1 %}
+    <div class="player text-center">
+
+        <img style=" margin-bottom: 10px;" class="coverArt" src="{{ res.coverArt }}" alt="">
+        <div class="player-song" style="text-align: center;">
+            <h4>{{ res.track_name }}</h4>
+            
+            <h6>{{ res.artists.0.name }}</h6>
+        </div> <hr>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% if vote %}
+        <h6>You voted for {{vote.track_name}} by {{ vote.artists.0.name }}</h6>
+    {% endif %}
+    <h4>{{ play_next }}</h4>
+    <div class="poll" style="margin-bottom: 50px;">
+
+        <form action="" method="post" class="text-center">
+            {% csrf_token %}
+
+            {% for result in songs %}
+                {% if result.is_playing == 0 %}
+                <div class="form-check">
+                    <label class="form-check-label d-flex align-items-center" style="width: 100%;">
+                        <img src="{{ result.coverArt }}" alt="coverArt" style="width: 50px; margin-left: 30px;">
+                            <h7 style="margin-left: 20px;">{{ result.track_name }} - {{ result.artists.0.name }}</h7>
+                            <input class="form-check-input" value="{{ result.track_id }}" style="margin-left: 0; margin-top: 18px;" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    </label>
+                </div> <hr>
+                {% endif %}
+            {% endfor %}
+            
+            {% if songs %}
+            <button type="submit" class="btn btn-primary" style="margin-top: 25px ; margin-right: 0; ">SUBMIT</button>
+            {% endif %}
+        </form>
+          
+        
+    </div>
+</div>
+    
+</body>
+</html>
